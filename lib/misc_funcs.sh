@@ -25,10 +25,10 @@ function output_warning() {
   echo -e "${spacing} \e[31m$1\e[0m"
 }
 
-function output_stderr() { 
+function output_stderr() {
   # Outputs to stderr in case it is inside a function so it does not
   # disturb the return value. Useful for debugging.
-  echo "$@" 1>&2; 
+  echo "$@" 1>&2;
 }
 
 
@@ -102,11 +102,6 @@ function export_mix_env() {
 }
 
 function check_stack() {
-  if [ "${STACK}" = "cedar" ]; then
-    echo "ERROR: cedar stack is not supported, upgrade to cedar-14"
-    exit 1
-  fi
-
   if [ ! -f "${cache_path}/stack" ] || [ $(cat "${cache_path}/stack") != "${STACK}" ]; then
     output_section "Stack changed, will rebuild"
     $(clear_cached_files)
